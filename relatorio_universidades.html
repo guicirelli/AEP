@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Relatório de Universidades</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      color: #333;
+      padding: 30px;
+    }
+
+    h1 {
+      color: #1e2a38;
+      margin-bottom: 20px;
+    }
+
+    form {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      margin-bottom: 30px;
+    }
+
+    form h2 {
+      font-size: 18px;
+      color: #1e2a38;
+      margin-bottom: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      background-color: #1e2a38;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #2d3b50;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #1e2a38;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Instituições de Ensino</h1>
+
+  <form id="formUniversidade">
+    <h2>Cadastrar Nova Universidade</h2>
+
+    <div class="form-group">
+      <label for="nome">Nome da Universidade:</label>
+      <input type="text" id="nome" required>
+    </div>
+
+    <div class="form-group">
+      <label for="estado">Estado:</label>
+      <input type="text" id="estado" required>
+    </div>
+
+    <div class="form-group">
+      <label for="cidade">Cidade:</label>
+      <input type="text" id="cidade" required>
+    </div>
+
+    <div class="form-group">
+      <label for="rua">Rua:</label>
+      <input type="text" id="rua" required>
+    </div>
+
+    <div class="form-group">
+      <label for="nota">Nota MEC:</label>
+      <input type="number" step="0.1" min="0" max="10" id="nota" required>
+    </div>
+
+    <button type="submit">Cadastrar</button>
+  </form>
+
+  <table id="tabelaUniversidades">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Estado</th>
+        <th>Cidade</th>
+        <th>Rua</th>
+        <th>Nota</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Universidade de São Paulo (USP)</td><td>SP</td><td>São Paulo</td><td>Rua da Reitoria</td><td>9.5</td></tr>
+      <tr><td>Universidade Estadual de Campinas (UNICAMP)</td><td>SP</td><td>Campinas</td><td>Rua Bertrand</td><td>9.4</td></tr>
+      <tr><td>Universidade Federal de Minas Gerais (UFMG)</td><td>MG</td><td>Belo Horizonte</td><td>Av. Antônio Carlos</td><td>9.2</td></tr>
+      <tr><td>Universidade Federal do Rio de Janeiro (UFRJ)</td><td>RJ</td><td>Rio de Janeiro</td><td>Av. Carlos Chagas</td><td>9.1</td></tr>
+      <tr><td>Universidade Federal de Santa Catarina (UFSC)</td><td>SC</td><td>Florianópolis</td><td>Rua Eng. Agronômico</td><td>8.9</td></tr>
+      <tr><td>Universidade de Brasília (UnB)</td><td>DF</td><td>Brasília</td><td>Campus Universitário Darcy Ribeiro</td><td>9.0</td></tr>
+      <tr><td>Universidade Estadual Paulista (UNESP)</td><td>SP</td><td>Botucatu</td><td>Rua Prof. Hilário Veiga</td><td>8.8</td></tr>
+      <tr><td>Universidade Federal do Paraná (UFPR)</td><td>PR</td><td>Curitiba</td><td>Rua General Carneiro</td><td>8.7</td></tr>
+      <tr><td>Universidade Federal do Ceará (UFC)</td><td>CE</td><td>Fortaleza</td><td>Av. da Universidade</td><td>8.6</td></tr>
+      <tr><td>Universidade Federal do Rio Grande do Sul (UFRGS)</td><td>RS</td><td>Porto Alegre</td><td>Av. Paulo Gama</td><td>9.3</td></tr>
+    </tbody>
+  </table>
+
+  <script>
+    const form = document.getElementById('formUniversidade');
+    const tabela = document.getElementById('tabelaUniversidades').querySelector('tbody');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const nome = document.getElementById('nome').value.trim();
+      const estado = document.getElementById('estado').value.trim();
+      const cidade = document.getElementById('cidade').value.trim();
+      const rua = document.getElementById('rua').value.trim();
+      const nota = document.getElementById('nota').value.trim();
+
+      if (nome && estado && cidade && rua && nota) {
+        const novaLinha = document.createElement('tr');
+
+        novaLinha.innerHTML = `
+          <td>${nome}</td>
+          <td>${estado}</td>
+          <td>${cidade}</td>
+          <td>${rua}</td>
+          <td>${nota}</td>
+        `;
+
+        tabela.appendChild(novaLinha);
+        form.reset();
+      }
+    });
+  </script>
+
+</body>
+</html>
